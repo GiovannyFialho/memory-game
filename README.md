@@ -1,50 +1,71 @@
-# Welcome to your Expo app 👋
+# Memory Game 🧠
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple and fun **Memory Game** built with **React Native + Expo**, focused on studying and experimenting with animations using **React Native Reanimated**.
 
-## Get started
+## 📱 About the Project
 
-1. Install dependencies
+Memory Game is a classic card-matching game where players flip cards to find pairs. This project was created primarily for **learning purposes**, with a strong focus on implementing smooth and engaging animations.
 
-   ```bash
-   npm install
-   ```
+## Technologies 🚀
 
-2. Start the app
+- React Native
+- Expo
+- React Native Reanimated
 
-   ```bash
-   npx expo start
-   ```
+## Features 🎯
 
-In the output, you'll find options to open the app in a
+- 🎮 Classic memory card game mechanics
+- ⚡ Smooth animations using Reanimated
+- 🧩 Three difficulty levels:
+  - Easy
+  - Medium
+  - Hard
+- 🔄 Restart game functionality
+- ⏱️ (Optional/Future) Timer and score tracking
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Difficulty Levels 🧠
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Level  | Description                      |
+| ------ | -------------------------------- |
+| Easy   | Fewer cards, ideal for beginners |
+| Medium | Balanced difficulty              |
+| Hard   | More cards, greater challenge    |
 
-## Get a fresh project
+## Installation 📦
 
-When you're ready, run:
+Clone the repository:
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/memory-game.git
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Navigate to the project folder:
 
-## Learn more
+```bash
+cd memory-game
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Install dependencies:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm install
+```
 
-## Join the community
+Start the project:
 
-Join our community of developers creating universal apps.
+```bash
+npx expo start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Learning Goals 🎓
+
+This project is intended to explore:
+
+- Advanced animations with Reanimated
+- Gesture handling (optional)
+- Performance optimization in React Native
+- Component structuring and reusable logic
+
+## License 📄
+
+This project is licensed under the MIT License.
