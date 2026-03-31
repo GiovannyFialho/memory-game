@@ -11,7 +11,7 @@ export const colors = {
     gray700: "#090916",
   },
   accent: {
-    purple: "#C27CFB",
+    purple: "#6121EB",
     blue: "#7DAFFF",
     cyan: "#55EAE1",
     green: "#32D74B",
