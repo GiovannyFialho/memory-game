@@ -17,7 +17,15 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       logout: () => {},
-      setAuthenticated: (name: string) => {},
+      setAuthenticated: (name: string) => {
+        set({
+          user: {
+            name,
+            id: `user-${Date.now()}`,
+            createdAt: new Date(),
+          },
+        });
+      },
     }),
     {
       name: "@memory-game:auth",
