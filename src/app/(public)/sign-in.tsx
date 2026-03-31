@@ -25,13 +25,21 @@ export default function SignIn() {
 
         <View style={styles.titleContainer}>
           <Text style={styles.title}>memory game</Text>
+
           <Text style={styles.subtitle}>
             Teste sua memória enquanto aprende!
           </Text>
         </View>
 
         <View style={styles.formContainer}>
-          <TextInput />
+          <TextInput
+            placeholder="Digite seu nome"
+            style={styles.input}
+            placeholderTextColor={colors.grayscale.gray300}
+            textAlign="center"
+            autoCapitalize="words"
+            returnKeyType="done"
+          />
 
           <View style={styles.buttonGlow}>
             <LinearGradient
@@ -85,7 +93,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     width: "100%",
-    gap: 16,
+    gap: 24,
   },
   buttonText: {
     fontSize: 16,
@@ -106,5 +114,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 20,
     elevation: 15,
+  },
+  input: {
+    width: "100%",
+    backgroundColor: colors.grayscale.gray500,
+    borderRadius: 50,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    fontSize: 16,
+    color: colors.grayscale.white,
+    borderWidth: 1,
+    borderColor: colors.grayscale.gray400,
   },
 });
