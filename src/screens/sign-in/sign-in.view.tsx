@@ -9,7 +9,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 
 import { useSignInModel } from "@/screens/sign-in/sign-in.model";
 
@@ -20,6 +23,8 @@ export function SignInView({
   setUsername,
   handleSubmit,
 }: ReturnType<typeof useSignInModel>) {
+  const handleSubmitPressAnimation = usePressAnimation();
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -55,18 +60,23 @@ export function SignInView({
               onChangeText={setUsername}
             />
 
-            <View style={styles.buttonGlow}>
+            <Animated.View style={handleSubmitPressAnimation.animatedStyle}>
               <LinearGradient
                 colors={gradients.colorful}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 2 }}
                 style={styles.buttonGradient}
               >
-                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleSubmit}
+                  onPressIn={handleSubmitPressAnimation.onPressIn}
+                  onPressOut={handleSubmitPressAnimation.onPressOut}
+                >
                   <Text style={styles.buttonText}>Entrar</Text>
                 </TouchableOpacity>
               </LinearGradient>
-            </View>
+            </Animated.View>
           </View>
         </View>
       </KeyboardAvoidingView>
