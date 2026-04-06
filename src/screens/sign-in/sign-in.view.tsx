@@ -1,86 +1,96 @@
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useInputFocusAnimation } from "@/animations/hooks/useInputFocusAnimation";
 import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 
 import { useSignInModel } from "@/screens/sign-in/sign-in.model";
 
 import { colors, gradients } from "@/constants/colors";
 
+const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+
 export function SignInView({
   username,
   setUsername,
   handleSubmit,
 }: ReturnType<typeof useSignInModel>) {
+  const animatedTextInputAnimation = useInputFocusAnimation();
   const handleSubmitPressAnimation = usePressAnimation();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
-      >
-        <View style={styles.content}>
-          <View style={styles.logoContainer}>
-            <Image
-              style={styles.logo}
-              source={require("@/assets/Logo.png")}
-              resizeMode="contain"
-            />
-          </View>
+    <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          style={{ flex: 1 }}
+        >
+          <View style={styles.content}>
+            <View style={styles.logoContainer}>
+              <Image
+                style={styles.logo}
+                source={require("@/assets/Logo.png")}
+                resizeMode="contain"
+              />
+            </View>
 
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>memory game</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>memory game</Text>
 
-            <Text style={styles.subtitle}>
-              Teste sua memória enquanto aprende!
-            </Text>
-          </View>
+              <Text style={styles.subtitle}>
+                Teste sua memória enquanto aprende!
+              </Text>
+            </View>
 
-          <View style={styles.formContainer}>
-            <TextInput
-              value={username}
-              placeholder="Digite seu nome"
-              placeholderTextColor={colors.grayscale.gray300}
-              style={styles.input}
-              textAlign="center"
-              autoCapitalize="words"
-              returnKeyType="done"
-              onChangeText={setUsername}
-            />
+            <View style={styles.formContainer}>
+              <AnimatedTextInput
+                value={username}
+                placeholder="Digite seu nome"
+                placeholderTextColor={colors.grayscale.gray300}
+                style={[styles.input, animatedTextInputAnimation.animatedStyle]}
+                textAlign="center"
+                autoCapitalize="words"
+                returnKeyType="done"
+                onChangeText={setUsername}
+                onFocus={animatedTextInputAnimation.onFocus}
+                onBlur={animatedTextInputAnimation.onBlur}
+              />
 
-            <Animated.View style={handleSubmitPressAnimation.animatedStyle}>
-              <LinearGradient
-                colors={gradients.colorful}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 2 }}
-                style={styles.buttonGradient}
-              >
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={handleSubmit}
-                  onPressIn={handleSubmitPressAnimation.onPressIn}
-                  onPressOut={handleSubmitPressAnimation.onPressOut}
+              <Animated.View style={handleSubmitPressAnimation.animatedStyle}>
+                <LinearGradient
+                  colors={gradients.colorful}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 2 }}
+                  style={styles.buttonGradient}
                 >
-                  <Text style={styles.buttonText}>Entrar</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-            </Animated.View>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={handleSubmit}
+                    onPressIn={handleSubmitPressAnimation.onPressIn}
+                    onPressOut={handleSubmitPressAnimation.onPressOut}
+                  >
+                    <Text style={styles.buttonText}>Entrar</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+              </Animated.View>
+            </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
