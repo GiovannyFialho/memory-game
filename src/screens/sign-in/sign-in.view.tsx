@@ -5,7 +5,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -18,6 +17,8 @@ import { useInputFocusAnimation } from "@/animations/hooks/useInputFocusAnimatio
 import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 
 import { useSignInModel } from "@/screens/sign-in/sign-in.model";
+
+import { AppText } from "@/shared/components/app-text";
 
 import { colors, gradients } from "@/constants/colors";
 
@@ -48,11 +49,13 @@ export function SignInView({
             </View>
 
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>memory game</Text>
+              <AppText weight="extra-bold" style={styles.title}>
+                memory game
+              </AppText>
 
-              <Text style={styles.subtitle}>
+              <AppText style={styles.subtitle}>
                 Teste sua memória enquanto aprende!
-              </Text>
+              </AppText>
             </View>
 
             <View style={styles.formContainer}>
@@ -82,7 +85,9 @@ export function SignInView({
                     onPressIn={handleSubmitPressAnimation.onPressIn}
                     onPressOut={handleSubmitPressAnimation.onPressOut}
                   >
-                    <Text style={styles.buttonText}>Entrar</Text>
+                    <AppText weight="bold" style={styles.buttonText}>
+                      Entrar
+                    </AppText>
                   </TouchableOpacity>
                 </LinearGradient>
               </Animated.View>
@@ -119,7 +124,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     color: colors.grayscale.gray100,
-    fontWeight: "800",
     marginBottom: 8,
   },
   subtitle: {
@@ -132,7 +136,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "bold",
     color: colors.grayscale.white,
   },
   buttonGradient: {
@@ -157,6 +160,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 16,
     fontSize: 16,
+    fontFamily: "Baloo2_400Regular",
     color: colors.grayscale.white,
     borderWidth: 1,
     borderColor: colors.grayscale.gray400,
