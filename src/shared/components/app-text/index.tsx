@@ -1,5 +1,7 @@
 import { Text, type TextProps } from "react-native";
 
+import { colors } from "@/constants/colors";
+
 type AppTextProps = TextProps & {
   weight?: "regular" | "medium" | "semi-bold" | "bold" | "extra-bold";
 };
@@ -15,5 +17,10 @@ const fontMap = {
 export function AppText({ style, weight = "regular", ...rest }: AppTextProps) {
   const fontFamily = fontMap[weight];
 
-  return <Text {...rest} style={[style, { fontFamily }]} />;
+  return (
+    <Text
+      {...rest}
+      style={[style, { fontFamily, color: colors.grayscale.gray100 }]}
+    />
+  );
 }

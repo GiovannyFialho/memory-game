@@ -3,12 +3,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AppText } from "@/shared/components/app-text";
 
+import { HomeHeader } from "@/screens/home/components/home-header";
+
 import { colors } from "@/constants/colors";
 
 export function HomeView() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
+        <HomeHeader />
+
         <AppText style={styles.title}>Home</AppText>
       </View>
     </SafeAreaView>
