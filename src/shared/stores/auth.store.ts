@@ -20,8 +20,8 @@ export const useAuthStore = create<AuthStore>()(
       setAuthenticated: (name: string) => {
         set({
           user: {
-            name,
             id: `user-${Date.now()}`,
+            name,
             createdAt: new Date(),
           },
         });
