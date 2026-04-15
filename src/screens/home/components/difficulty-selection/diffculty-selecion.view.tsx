@@ -2,8 +2,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { AppText } from "@/shared/components/app-text";
+import { getDifficultyColor } from "@/shared/utils/difficulty";
 
 import { useDifficultyViewModel } from "@/screens/home/components/difficulty-selection/diffculty-selecion.model";
+import { DifficultyIconView } from "@/screens/home/components/difficulty-selection/difficulty-icon/difficulty-icon.view";
 
 import { colors } from "@/constants/colors";
 
@@ -18,7 +20,7 @@ export function DifficultySelectionView() {
         <View style={styles.timeIndicator}>
           <MaterialCommunityIcons
             name="clock-outline"
-            color={colors.accent.green}
+            color={colors.feedback.info}
             size={16}
           />
 
@@ -32,7 +34,15 @@ export function DifficultySelectionView() {
             style={styles.difficultyTab}
             key={`difficulty-key-${difficulty}`}
           >
-            <AppText>{difficulty}</AppText>
+            <View style={styles.difficultyBadge}>
+              <DifficultyIconView
+                isSelected
+                difficulty={difficulty}
+                color={getDifficultyColor(difficulty)}
+                inactiveColor={colors.grayscale.gray200}
+              />
+              <AppText>{difficulty}</AppText>
+            </View>
           </Pressable>
         ))}
       </View>
@@ -60,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grayscale.gray500,
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 30,
+    borderRadius: 8,
     gap: 6,
   },
   difficultyTabs: {
@@ -80,5 +90,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     gap: 6,
     zIndex: 1,
+  },
+  difficultyBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    padding: 8,
+    borderRadius: "50%",
   },
 });
