@@ -10,7 +10,8 @@ import { DifficultyIconView } from "@/screens/home/components/difficulty-selecti
 import { colors } from "@/constants/colors";
 
 export function DifficultySelectionView() {
-  const { difficulties } = useDifficultyViewModel();
+  const { difficulties, selectedDifficulty, setSelectedDifficulty } =
+    useDifficultyViewModel();
 
   return (
     <View style={styles.difficultySection}>
@@ -31,14 +32,15 @@ export function DifficultySelectionView() {
       <View style={styles.difficultyTabs}>
         {difficulties.map((difficulty) => (
           <Pressable
-            style={styles.difficultyTab}
             key={`difficulty-key-${difficulty}`}
+            style={styles.difficultyTab}
+            onPress={() => setSelectedDifficulty(difficulty)}
           >
             <View style={styles.difficultyBadge}>
               <DifficultyIconView
-                isSelected
                 difficulty={difficulty}
                 color={getDifficultyColor(difficulty)}
+                isSelected={selectedDifficulty === difficulty}
                 inactiveColor={colors.grayscale.gray200}
               />
               <AppText>{difficulty}</AppText>

@@ -5,9 +5,9 @@ import type { Difficulty } from "@/shared/interfaces/difficulty";
 import { useDifficultyIconViewModel } from "@/screens/home/components/difficulty-selection/difficulty-icon/useDifficultyIcon.model";
 
 export interface DifficultyIconViewProps {
-  isSelected: boolean;
   difficulty: Difficulty;
   color: string;
+  isSelected: boolean;
   inactiveColor: string;
 }
 
