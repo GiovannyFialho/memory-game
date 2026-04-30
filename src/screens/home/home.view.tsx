@@ -1,8 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { AppText } from "@/shared/components/app-text";
-
+import { ChallengesList } from "@/screens/home/components/challenges-list";
 import { DifficultySelectionView } from "@/screens/home/components/difficulty-selection/diffculty-selecion.view";
 import { HomeHeader } from "@/screens/home/components/home-header";
 
@@ -16,7 +15,7 @@ export function HomeView() {
 
         <DifficultySelectionView />
 
-        <AppText style={styles.title}>Home</AppText>
+        <ChallengesList />
       </View>
     </SafeAreaView>
   );
@@ -30,9 +29,5 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-  },
-  title: {
-    fontSize: 45,
-    color: colors.grayscale.white,
   },
 });
