@@ -22,6 +22,12 @@ export interface Challenge {
   gradient?: [string, string];
 }
 
+export interface StoreCard extends CardItem {
+  id: string;
+  isFlipped: boolean;
+  isMatched: boolean;
+}
+
 export interface GameState {
   status: GameStatus;
   challenge: Challenge | null;
@@ -29,7 +35,7 @@ export interface GameState {
   timeRemaining: number;
   timeElapsed: number;
   startedAt: Date | null;
-  cards: CardItem[];
+  cards: StoreCard[];
 }
 
 export interface GameResult {
