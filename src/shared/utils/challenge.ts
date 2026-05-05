@@ -1,6 +1,42 @@
 import type { ImageSourcePropType } from "react-native";
 
+import { Difficulty } from "@/shared/interfaces/difficulty";
+
 import { colors, gradients } from "@/constants/colors";
+
+export type GameStatus =
+  | "idle"
+  | "countdown"
+  | "playing"
+  | "paused"
+  | "finished"
+  | "timeout";
+
+export interface Challenge {
+  id: string;
+  title: string;
+  difficulty: Difficulty;
+  estimatedTime: string;
+  timeLimit: number;
+  cards: CardItem[];
+  gradient?: [string, string];
+}
+
+export interface GameState {
+  status: GameStatus;
+  challenge: Challenge | null;
+  selectedCards: CardItem[];
+  timeRemaining: number;
+  timeElapsed: number;
+  startedAt: Date | null;
+  cards: CardItem[];
+}
+
+export interface GameResult {
+  completed: boolean;
+  timeElapsed: number;
+  challenge: Challenge;
+}
 
 export interface CardItem {
   name: string;

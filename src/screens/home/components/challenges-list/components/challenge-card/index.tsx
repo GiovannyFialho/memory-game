@@ -20,7 +20,11 @@ export function ChallengeCard(challenge: ChallengeTheme) {
       style={styles.challengeCard}
     >
       <Animated.View style={pressAnimation.animatedStyle}>
-        <Pressable style={styles.challengeContent}>
+        <Pressable
+          style={styles.challengeContent}
+          onPressIn={pressAnimation.onPressIn}
+          onPressOut={pressAnimation.onPressOut}
+        >
           <AppText weight="extra-bold" style={styles.challengeTitle}>
             {challenge.title}
           </AppText>
