@@ -31,7 +31,7 @@ export interface StoreCard extends CardItem {
 export interface GameState {
   status: GameStatus;
   challenge: Challenge | null;
-  selectedCards: CardItem[];
+  selectedCards: StoreCard[];
   timeRemaining: number;
   timeElapsed: number;
   startedAt: Date | null;
