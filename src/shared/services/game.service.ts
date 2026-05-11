@@ -1,5 +1,5 @@
 import { CardService } from "@/shared/services/card.service";
-import { Challenge, GameState } from "@/shared/utils/challenge";
+import { Challenge, GameResult, GameState } from "@/shared/utils/challenge";
 
 export class GameService {
   static initializeGame(challenge: Challenge): GameState {
@@ -139,5 +139,33 @@ export class GameService {
 
   static resetGame(challenge: Challenge): GameState {
     return GameService.initializeGame(challenge);
+  }
+
+  static tick(gameState: GameState): GameState {
+    if (gameState.status !== "playing") {
+      return gameState;
+    }
+
+    const timeRemaining = Math.max(0, gameState.timeRemaining - 1);
+    const timeElapsed = gameState.timeElapsed + 1;
+
+    return {
+      ...gameState,
+      status: timeRemaining === 0 ? "timeout" : gameState.status,
+      timeRemaining,
+      timeElapsed,
+    };
+  }
+
+  static finishGame(gameState: GameState): GameResult | null {
+    if (!gameState.challenge) {
+      return null;
+    }
+
+    return {
+      completed: gameState.status === "finished",
+      challenge: gameState.challenge,
+      timeElapsed: gameState.timeElapsed,
+    };
   }
 }
