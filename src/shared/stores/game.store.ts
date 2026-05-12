@@ -33,9 +33,38 @@ export const useGameStore = create<GameStore>((set, get) => ({
   _timerId: null,
   timeElapsed: 0,
   timeRemaining: 0,
-  tick: () => {},
-  startTimer: () => {},
-  stopTimer: () => {},
+  tick: () => {
+    const currentState = get();
+    const newState = GameService.tick(currentState);
+
+    set(newState);
+
+    if (newState.status === "timeout") {
+      get().stopTimer();
+    }
+  },
+  startTimer: () => {
+    const currentState = get();
+
+    if (currentState._timerId) {
+      clearInterval(currentState._timerId);
+    }
+
+    const timerID = setInterval(() => {
+      get().tick();
+    }, 1000);
+
+    set({ _timerId: timerID });
+  },
+  stopTimer: () => {
+    const currentState = get();
+
+    if (currentState._timerId) {
+      clearInterval(currentState._timerId);
+
+      set({ _timerId: null });
+    }
+  },
 
   // life cycle
   startedAt: null,
@@ -61,7 +90,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     return result;
   },
 
-  // preview cards
+  // cards
   cards: [],
   selectedCards: [],
   selectCard: (cardId: string) => {},
