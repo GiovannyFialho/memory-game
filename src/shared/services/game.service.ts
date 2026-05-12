@@ -1,5 +1,5 @@
 import { CardService } from "@/shared/services/card.service";
-import {
+import type {
   Challenge,
   GameResult,
   GameState,

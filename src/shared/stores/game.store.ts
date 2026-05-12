@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { GameService } from "@/shared/services/game.service";
 import type {
   Challenge,
   GameResult,
@@ -28,11 +29,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
   status: "idle",
   challenge: null,
 
-  finishGame: () => null,
-  resetMismatchedCards: () => {},
-  selectCard: (cardId: string) => {},
-  startGame: () => {},
-
   // timer
   _timerId: null,
   timeElapsed: 0,
@@ -43,15 +39,38 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   // life cycle
   startedAt: null,
-  initGame: () => {},
+  initGame: (challenge: Challenge) => {
+    const gameState = GameService.initializeGame(challenge);
+
+    set(gameState);
+  },
+  startGame: () => {
+    const currentGame = get();
+    const newState = GameService.startGame(currentGame);
+
+    set(newState);
+  },
   clearGame: () => {},
   pauseGame: () => {},
   resumeGame: () => {},
   resetGame: () => {},
+  finishGame: () => {
+    const currentGame = get();
+    const result = GameService.finishGame(currentGame);
+
+    return result;
+  },
 
   // preview cards
   cards: [],
   selectedCards: [],
+  selectCard: (cardId: string) => {},
+  resetMismatchedCards: () => {
+    const currentGame = get();
+    const newState = GameService.resetMismatchedCards(currentGame);
+
+    set(newState);
+  },
   previewAllCards: () => {},
   hideAllCards: () => {},
 }));
