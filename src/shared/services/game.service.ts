@@ -180,4 +180,12 @@ export class GameService {
       timeElapsed: gameState.timeElapsed,
     };
   }
+
+  static previewAllCards(cards: StoreCard[]): StoreCard[] {
+    return cards.map((card) => CardService.flipCard(card, true));
+  }
+
+  static hideAllCards(cards: StoreCard[]): StoreCard[] {
+    return cards.map((card) => CardService.flipCard(card, false));
+  }
 }
