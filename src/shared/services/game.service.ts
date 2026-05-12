@@ -1,5 +1,10 @@
 import { CardService } from "@/shared/services/card.service";
-import { Challenge, GameResult, GameState } from "@/shared/utils/challenge";
+import {
+  Challenge,
+  GameResult,
+  GameState,
+  StoreCard,
+} from "@/shared/utils/challenge";
 
 export class GameService {
   static initializeGame(challenge: Challenge): GameState {
@@ -22,6 +27,10 @@ export class GameService {
       status: "playing",
       startedAt: new Date(),
     };
+  }
+
+  static isGameCompleted(cards: StoreCard[]): boolean {
+    return cards.every((card) => card.isMatched);
   }
 
   static selectCard(
@@ -81,11 +90,14 @@ export class GameService {
         }
       });
 
+      const isCompleted = GameService.isGameCompleted(finalCards);
+
       return {
         newState: {
           ...gameState,
           cards: finalCards,
           selectedCards: [],
+          status: isCompleted ? "finished" : "playing",
         },
         action: "match",
       };
