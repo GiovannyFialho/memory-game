@@ -19,6 +19,21 @@ export function DifficultyTab({
   isSelected,
   setSelectedDifficulty,
 }: DifficultyTabProps) {
+  function getDifficultyLabel(difficulty: Difficulty) {
+    switch (difficulty) {
+      case "easy":
+        return "Fácil";
+      case "medium":
+        return "Médio";
+      case "hard":
+        return "Difícil";
+      default:
+        return "Não definido";
+    }
+  }
+
+  const difficultyLabel = getDifficultyLabel(difficulty);
+
   return (
     <Pressable
       style={styles.difficultyTab}
@@ -40,7 +55,7 @@ export function DifficultyTab({
               : colors.grayscale.gray200,
           }}
         >
-          {difficulty}
+          {difficultyLabel}
         </AppText>
       </View>
     </Pressable>

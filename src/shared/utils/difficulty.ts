@@ -3,9 +3,9 @@ import { Difficulty } from "@/shared/interfaces/difficulty";
 import { colors } from "@/constants/colors";
 
 const difficultyColors: Record<Difficulty, string> = {
-  Fácil: colors.feedback.info,
-  Médio: colors.semantic.warning,
-  Difícil: colors.semantic.error,
+  easy: colors.feedback.info,
+  medium: colors.semantic.warning,
+  hard: colors.semantic.error,
 };
 
 export function getDifficultyColor(difficulty: Difficulty) {

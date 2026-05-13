@@ -4,6 +4,30 @@ import { Difficulty } from "@/shared/interfaces/difficulty";
 
 import { colors, gradients } from "@/constants/colors";
 
+export interface DifficultyConfig {
+  difficulty: Difficulty;
+  timeLimit: number;
+  estimatedTime: string;
+}
+
+export const difficultyConfigs: Record<Difficulty, DifficultyConfig> = {
+  easy: {
+    difficulty: "easy",
+    timeLimit: 300,
+    estimatedTime: "5 min",
+  },
+  medium: {
+    difficulty: "medium",
+    timeLimit: 240,
+    estimatedTime: "4 min",
+  },
+  hard: {
+    difficulty: "hard",
+    timeLimit: 30,
+    estimatedTime: "3 min",
+  },
+};
+
 export type GameStatus =
   | "idle"
   | "countdown"
