@@ -6,18 +6,25 @@ import { AppText } from "@/shared/components/app-text";
 
 import { useDifficultyViewModel } from "@/screens/home/components/difficulty-selection/diffculty-selecion.model";
 import { DifficultyTab } from "@/screens/home/components/difficulty-selection/difficulty-tab";
+import { Difficulty } from "@/shared/interfaces/difficulty";
 
 import { colors } from "@/constants/colors";
 
-export function DifficultySelectionView() {
+export interface DifficultySelectionViewProps {
+  selectedDifficulty: Difficulty;
+  setSelectedDifficulty: (difficulty: Difficulty) => void;
+}
+
+export function DifficultySelectionView({
+  selectedDifficulty,
+  setSelectedDifficulty,
+}: DifficultySelectionViewProps) {
   const {
     difficulties,
-    selectedDifficulty,
-    setSelectedDifficulty,
     animatedIndicatorStyle,
     difficultyConfig,
     timeAnimatedStyle,
-  } = useDifficultyViewModel();
+  } = useDifficultyViewModel({ selectedDifficulty, setSelectedDifficulty });
 
   return (
     <View style={styles.difficultySection}>

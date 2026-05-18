@@ -9,12 +9,23 @@ import type { ChallengeTheme } from "@/shared/utils/challenge";
 import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 import { colors } from "@/constants/colors";
 
-export function ChallengeCard(challenge: ChallengeTheme) {
+interface ChallengeCardProps extends ChallengeTheme {
+  handleSelectChallenge: (challengeId: string) => void;
+}
+
+export function ChallengeCard({
+  cards,
+  id,
+  title,
+  gradient,
+  arrowColor,
+  handleSelectChallenge,
+}: ChallengeCardProps) {
   const pressAnimation = usePressAnimation();
 
   return (
     <LinearGradient
-      colors={challenge.gradient as readonly [string, string]}
+      colors={gradient as readonly [string, string]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.challengeCard}
@@ -24,17 +35,13 @@ export function ChallengeCard(challenge: ChallengeTheme) {
           style={styles.challengeContent}
           onPressIn={pressAnimation.onPressIn}
           onPressOut={pressAnimation.onPressOut}
+          onPress={() => handleSelectChallenge(id)}
         >
           <AppText weight="extra-bold" style={styles.challengeTitle}>
-            {challenge.title}
+            {title}
           </AppText>
 
-          <View
-            style={[
-              styles.arrowButton,
-              { backgroundColor: challenge.arrowColor },
-            ]}
-          >
+          <View style={[styles.arrowButton, { backgroundColor: arrowColor }]}>
             <MaterialCommunityIcons name="arrow-right" size={24} />
           </View>
         </Pressable>
