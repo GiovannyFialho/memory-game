@@ -9,7 +9,8 @@ import { AppText } from "@/shared/components/app-text";
 import { colors } from "@/constants/colors";
 
 export function GameView() {
-  const { selectedTheme } = useGameViewModel();
+  const { selectedTheme, countdownVisible, handleCountdownComplete } =
+    useGameViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,7 +24,10 @@ export function GameView() {
         </AppText>
       </View>
 
-      <CountdownOverlay />
+      <CountdownOverlay
+        countdownVisible={countdownVisible}
+        onComplete={handleCountdownComplete}
+      />
     </SafeAreaView>
   );
 }

@@ -6,7 +6,10 @@ import { useCountdownOverlayViewModel } from "@/screens/game/components/countdow
 
 export function CountdownOverlayView({
   count,
+  visible,
 }: ReturnType<typeof useCountdownOverlayViewModel>) {
+  if (!visible) return;
+
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
