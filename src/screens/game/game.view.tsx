@@ -1,6 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { CountdownOverlay } from "@/screens/game/components/countdown-overlay";
 import { useGameViewModel } from "@/screens/game/useGame.viewModel";
 
 import { AppText } from "@/shared/components/app-text";
@@ -21,6 +22,8 @@ export function GameView() {
           Encontre todos os pares dentro do tempo!
         </AppText>
       </View>
+
+      <CountdownOverlay />
     </SafeAreaView>
   );
 }
