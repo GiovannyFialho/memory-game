@@ -125,7 +125,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
   // cards
   cards: [],
   selectedCards: [],
-  selectCard: (cardId: string) => {},
+  selectCard: (cardId: string) => {
+    const currentState = get();
+    const { newState } = GameService.selectCard(currentState, cardId);
+
+    set(newState);
+  },
   resetMismatchedCards: () => {
     const currentGame = get();
     const newState = GameService.resetMismatchedCards(currentGame);
