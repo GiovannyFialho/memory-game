@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 
 import { AppText } from "@/shared/components/app-text";
@@ -17,7 +17,6 @@ export function GameCard({ index, card }: GameCardProps) {
     <Animated.View style={[styles.containerWrapper]}>
       <Pressable style={styles.container}>
         <Animated.View style={styles.innerContainer}>
-          <Animated.View></Animated.View>
           <Animated.View style={[styles.cardFace]}>
             <LinearGradient
               start={{ x: 0, y: 0 }}
@@ -25,9 +24,21 @@ export function GameCard({ index, card }: GameCardProps) {
               colors={gradients.card}
               style={styles.cardGradient}
             >
-              <AppText>{card.name}</AppText>
+              <Image source={card.image} style={styles.cardImage} />
+              <AppText style={styles.cardText}>{card.name}</AppText>
             </LinearGradient>
           </Animated.View>
+        </Animated.View>
+
+        <Animated.View style={[styles.cardFace]}>
+          <LinearGradient
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            colors={gradients.card}
+            style={styles.cardGradient}
+          >
+            <Image source={require("@/assets/images/logo-transparent.png")} />
+          </LinearGradient>
         </Animated.View>
       </Pressable>
     </Animated.View>
@@ -49,9 +60,6 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
   },
-  cardContent: {
-    alignItems: "center",
-  },
   cardFace: {
     position: "absolute",
     backfaceVisibility: "hidden",
@@ -63,5 +71,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
+    gap: 8,
+  },
+  cardImage: {
+    width: 32,
+    height: 32,
+    borderRadius: 8,
+  },
+  cardText: {
+    color: colors.grayscale.gray100,
+    fontSize: 16,
   },
 });
