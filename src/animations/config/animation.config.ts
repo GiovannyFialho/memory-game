@@ -1,6 +1,8 @@
 import { Easing } from "react-native";
 import { WithSpringConfig } from "react-native-reanimated";
 
+import type { AnimationTimings } from "@/animations/interfaces/animation.interfaces";
+
 export const SPRING_CONFIG = {
   press: {
     damping: 15,
@@ -36,7 +38,7 @@ export const ENTRY_ANIMATION_START_POSITIONS = {
   },
 };
 
-export const ANIMATION_TIMINGS = {
+export const ANIMATION_TIMINGS: AnimationTimings = {
   entry: {
     throw: {
       duration: 400,
