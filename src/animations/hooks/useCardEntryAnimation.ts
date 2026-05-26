@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-import { useSharedValue, withDelay, withSpring } from "react-native-reanimated";
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 
 import {
   ANIMATION_TIMINGS,
@@ -48,6 +54,23 @@ export function useCardEntryAnimation({
           withSpring(0, SPRING_CONFIG.entryDeck),
         );
       }
+
+      if (entryAnimationType === "deck") {
+        translateX.value = ENTRY_ANIMATION_START_POSITIONS.deck.x;
+        translateY.value = ENTRY_ANIMATION_START_POSITIONS.deck.y;
+
+        translateX.value = withDelay(
+          delay,
+          withTiming(0, SPRING_CONFIG.entryDeck),
+        );
+        translateY.value = withDelay(
+          delay,
+          withTiming(0, SPRING_CONFIG.entryDeck),
+        );
+      }
+
+      opacity.value = withDelay(delay, withTiming(1, { duration: 150 }));
+      scale.value = withDelay(delay, withSpring(1, SPRING_CONFIG.entryScale));
     }
   }, [
     cardIndex,
@@ -56,7 +79,19 @@ export function useCardEntryAnimation({
     translateX,
     translateY,
     rotation,
+    opacity,
+    scale,
   ]);
 
-  return {};
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateX.value },
+      { translateY: translateY.value },
+      { scale: scale.value },
+      { rotateZ: `${rotation.value}deg` },
+    ],
+    opacity: opacity.value,
+  }));
+
+  return { animatedStyle };
 }
