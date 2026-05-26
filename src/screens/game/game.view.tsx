@@ -7,6 +7,8 @@ import { useGameViewModel } from "@/screens/game/game.model";
 
 import { AppText } from "@/shared/components/app-text";
 
+import { GameHeader } from "@/screens/game/components/game-header/game-header.view";
+
 import { colors } from "@/constants/colors";
 
 export function GameView() {
@@ -15,6 +17,8 @@ export function GameView() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <GameHeader />
+
       <View style={styles.gameInfo}>
         <AppText weight="extra-bold" style={styles.title}>
           {selectedTheme?.title}
