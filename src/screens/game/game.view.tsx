@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CardGrid } from "@/screens/game/components/card-grid";
 import { CountdownOverlay } from "@/screens/game/components/countdown-overlay";
-import { useGameViewModel } from "@/screens/game/useGame.viewModel";
+import { useGameViewModel } from "@/screens/game/game.model";
 
 import { AppText } from "@/shared/components/app-text";
 

@@ -12,9 +12,10 @@ export function GameCardView({
   selectCard,
   frontAnimatedStyle,
   backAnimatedStyle,
+  entry,
 }: ReturnType<typeof useGameCardViewModel>) {
   return (
-    <Animated.View style={[styles.containerWrapper]}>
+    <Animated.View style={[styles.containerWrapper, entry.animatedStyle]}>
       <Pressable style={styles.container} onPress={() => selectCard(card.id)}>
         <Animated.View style={[styles.cardFace, frontAnimatedStyle]}>
           <LinearGradient
