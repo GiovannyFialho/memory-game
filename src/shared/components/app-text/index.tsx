@@ -20,7 +20,7 @@ export function AppText({ style, weight = "regular", ...rest }: AppTextProps) {
   return (
     <Text
       {...rest}
-      style={[style, { fontFamily, color: colors.grayscale.gray100 }]}
+      style={[{ fontFamily, color: colors.grayscale.gray100 }, style]}
     />
   );
 }
