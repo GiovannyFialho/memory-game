@@ -12,8 +12,16 @@ import { colors } from "@/constants/colors";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-export function GameHeader() {
-  const { timeString, isCriticalTime } = useGameHeaderViewModel();
+interface GameHeaderProps {
+  onGoBack: () => void;
+}
+
+export function GameHeader({ onGoBack }: GameHeaderProps) {
+  const {
+    timeString,
+    animatedStyle: animatedTimerStyle,
+    isCriticalTime,
+  } = useGameHeaderViewModel();
 
   const { animatedStyle, onPressIn, onPressOut } = usePressAnimation({
     scaleActive: 0.8,
@@ -26,6 +34,7 @@ export function GameHeader() {
         style={[styles.backButton, animatedStyle]}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
+        onPress={onGoBack}
       >
         <MaterialCommunityIcons
           name="chevron-left"
@@ -34,7 +43,7 @@ export function GameHeader() {
         />
       </AnimatedPressable>
 
-      <Animated.View style={styles.timerContainer}>
+      <Animated.View style={[styles.timerContainer, animatedTimerStyle]}>
         <MaterialCommunityIcons
           name="clock-outline"
           size={20}

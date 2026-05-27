@@ -1,3 +1,13 @@
+import { useEffect } from "react";
+import {
+  cancelAnimation,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
+
 import { useGameStore } from "@/shared/stores/game.store";
 
 export function useGameHeaderViewModel() {
@@ -5,10 +15,30 @@ export function useGameHeaderViewModel() {
 
   const minutes = Math.floor(timeRemaining / 60);
   const seconds = timeRemaining % 60;
+  const scale = useSharedValue(1);
 
   const timeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
-  const isCriticalTime = timeRemaining <= 10;
+  const isCriticalTime = timeRemaining <= 20;
 
-  return { timeString, isCriticalTime };
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  useEffect(() => {
+    if (isCriticalTime) {
+      scale.value = withRepeat(
+        withSequence(
+          withTiming(1.1, { duration: 300 }),
+          withTiming(1, { duration: 300 }),
+        ),
+        -1,
+        true,
+      );
+    } else {
+      cancelAnimation(scale);
+    }
+  }, [isCriticalTime, scale]);
+
+  return { timeString, animatedStyle, isCriticalTime };
 }

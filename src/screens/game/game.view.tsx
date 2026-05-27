@@ -12,12 +12,16 @@ import { GameHeader } from "@/screens/game/components/game-header/game-header.vi
 import { colors } from "@/constants/colors";
 
 export function GameView() {
-  const { selectedTheme, countdownVisible, handleCountdownComplete } =
-    useGameViewModel();
+  const {
+    selectedTheme,
+    countdownVisible,
+    handleCountdownComplete,
+    handleGoBack,
+  } = useGameViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
-      <GameHeader />
+      <GameHeader onGoBack={handleGoBack} />
 
       <View style={styles.gameInfo}>
         <AppText weight="extra-bold" style={styles.title}>
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: colors.grayscale.gray200,
+    marginBottom: 32,
   },
   gameInfo: {
     paddingHorizontal: 20,

@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 
 import type { CardEntryAnimationType } from "@/animations/config/animation.config";
@@ -27,6 +27,8 @@ export function useGameViewModel() {
   );
 
   const selectedTheme = challengeTheme.find((theme) => theme.id === themeId);
+
+  const handleGoBack = () => router.back();
 
   const handleCountdownComplete = useCallback(() => {
     setCountdownVisible(false);
@@ -97,5 +99,6 @@ export function useGameViewModel() {
     setEntryAnimationType,
     setShouldAnimate,
     handleCountdownComplete,
+    handleGoBack,
   };
 }
