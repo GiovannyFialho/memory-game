@@ -8,6 +8,7 @@ import { useModalAnimation } from "@/animations/hooks/useModalAnimation";
 import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 
 import { AppText } from "@/shared/components/app-text";
+import { useGameStore } from "@/shared/stores/game.store";
 
 import { colors, gradients } from "@/constants/colors";
 
@@ -24,6 +25,8 @@ export function VictoryModalView({
   onPlayAgain,
   onGoHistory,
 }: VictoryModalViewParams) {
+  const { timeElapsed } = useGameStore();
+
   const { animatedStyle, close } = useModalAnimation({ visible });
 
   const {
@@ -36,6 +39,11 @@ export function VictoryModalView({
     onPressIn: historyOnPressIn,
     onPressOut: historyOnPressOut,
   } = usePressAnimation();
+
+  const minutes = Math.floor(timeElapsed / 60);
+  const seconds = timeElapsed % 60;
+
+  const timeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 
   function handlePlayAgain() {
     close(onPlayAgain);
@@ -56,7 +64,7 @@ export function VictoryModalView({
           />
 
           <AppText weight="extra-bold" style={styles.title}>
-            Você concluiu o desafio em {}
+            Você concluiu o desafio em {timeString}
           </AppText>
 
           <View style={styles.buttonGlow}>
