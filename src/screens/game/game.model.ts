@@ -27,6 +27,7 @@ export function useGameViewModel() {
     initGame,
     cards,
     resetGame,
+    clearGame,
   } = useGameStore();
 
   const { entryAnimationType, setShouldAnimate, setEntryAnimationType } =
@@ -41,13 +42,15 @@ export function useGameViewModel() {
 
   const handleTryAgain = useCallback(() => {
     setIsTimeoutModalVisible(false);
+    setShouldAnimate(false);
+
     resetGame();
 
     createSequence()
       .wait(300)
       .then(() => setCountdownVisible(true))
       .run();
-  }, [setCountdownVisible, resetGame]);
+  }, [setShouldAnimate, resetGame, setCountdownVisible]);
 
   const handleExit = useCallback(() => {
     setIsTimeoutModalVisible(false);
@@ -59,6 +62,12 @@ export function useGameViewModel() {
   }, []);
 
   const handleGoBack = () => router.back();
+
+  const handleGoHome = () => {
+    clearGame();
+
+    router.replace("/(private)/home");
+  };
 
   const handleCountdownComplete = useCallback(() => {
     setCountdownVisible(false);
@@ -143,6 +152,7 @@ export function useGameViewModel() {
     setShouldAnimate,
     handleCountdownComplete,
     handleGoBack,
+    handleGoHome,
     handleTryAgain,
     handleExit,
   };

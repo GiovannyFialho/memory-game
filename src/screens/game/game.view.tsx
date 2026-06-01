@@ -19,8 +19,8 @@ export function GameView() {
     isTimeoutModalVisible,
     handleCountdownComplete,
     handleGoBack,
+    handleGoHome,
     handleTryAgain,
-    handleExit,
   } = useGameViewModel();
 
   return (
@@ -47,7 +47,7 @@ export function GameView() {
       <DefeatModalView
         visible={isTimeoutModalVisible}
         onTryAgain={handleTryAgain}
-        onGoHome={handleExit}
+        onGoHome={handleGoHome}
       />
     </SafeAreaView>
   );

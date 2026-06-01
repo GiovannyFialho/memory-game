@@ -27,20 +27,23 @@ export function useGameCardViewModel({
 
   const { selectCard, status } = useGameStore();
 
-  const entry = useCardEntryAnimation({ cardIndex: index });
-  const { animatedStyle: shakeAnimatedStyle, onShake } =
-    useCardShakeAnimation();
   const {
     playSuccessAnimation,
     fadeOutSuccessAnimation,
     resetAnimation: resetCardSuccessAnimation,
     animatedStyle: successAnimatedStyle,
   } = useCardSuccessAnimation();
+
   const {
     fallAnimation,
     resetAnimation: resetCardTimeoutAnimation,
     animatedStyle: timeoutAnimatedStyle,
   } = useCardTimeoutAnimation();
+
+  const entry = useCardEntryAnimation({ cardIndex: index });
+
+  const { animatedStyle: shakeAnimatedStyle, onShake } =
+    useCardShakeAnimation();
 
   const previousFlippedRef = useRef(card.isFlipped);
 

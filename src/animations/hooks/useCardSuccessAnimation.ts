@@ -25,7 +25,7 @@ export function useCardSuccessAnimation() {
   const resetAnimation = useCallback(() => {
     scale.value = 1;
     opacity.value = 1;
-  }, [opacity, scale]);
+  }, [scale, opacity]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
