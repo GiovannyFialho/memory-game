@@ -3,7 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 
 import type { CardEntryAnimationType } from "@/animations/config/animation.config";
 import { useAnimationStore } from "@/animations/store/animation.store";
-import { getEntryAnimationDuration } from "@/animations/utils/animation.utils";
+import {
+  getEntryAnimationDuration,
+  getFallAnimationDuration,
+} from "@/animations/utils/animation.utils";
 
 import { Difficulty } from "@/shared/interfaces/difficulty";
 import { useGameStore } from "@/shared/stores/game.store";
@@ -16,17 +19,44 @@ export function useGameViewModel() {
     difficulty: Difficulty;
   }>();
 
-  const { status, previewAllCards, hideAllCards, startGame, initGame, cards } =
-    useGameStore();
+  const {
+    status,
+    previewAllCards,
+    hideAllCards,
+    startGame,
+    initGame,
+    cards,
+    resetGame,
+  } = useGameStore();
 
   const { entryAnimationType, setShouldAnimate, setEntryAnimationType } =
     useAnimationStore();
 
+  const [isTimeoutModalVisible, setIsTimeoutModalVisible] = useState(false);
   const [countdownVisible, setCountdownVisible] = useState(
     status === "countdown",
   );
 
   const selectedTheme = challengeTheme.find((theme) => theme.id === themeId);
+
+  const handleTryAgain = useCallback(() => {
+    setIsTimeoutModalVisible(false);
+    resetGame();
+
+    createSequence()
+      .wait(300)
+      .then(() => setCountdownVisible(true))
+      .run();
+  }, [setCountdownVisible, resetGame]);
+
+  const handleExit = useCallback(() => {
+    setIsTimeoutModalVisible(false);
+
+    createSequence()
+      .wait(200)
+      .then(() => router.replace("/(private)/home"))
+      .run();
+  }, []);
 
   const handleGoBack = () => router.back();
 
@@ -55,6 +85,18 @@ export function useGameViewModel() {
     startGame,
     setShouldAnimate,
   ]);
+
+  useEffect(() => {
+    if (status === "finished") {
+      // TODO: Implement victory modal
+    }
+    if (status === "timeout") {
+      createSequence()
+        .wait(getFallAnimationDuration())
+        .then(() => setIsTimeoutModalVisible(true))
+        .run();
+    }
+  }, [status]);
 
   useEffect(() => {
     const theme = challengeTheme.find(({ id }) => id === themeId);
@@ -96,9 +138,12 @@ export function useGameViewModel() {
   return {
     selectedTheme,
     countdownVisible,
+    isTimeoutModalVisible,
     setEntryAnimationType,
     setShouldAnimate,
     handleCountdownComplete,
     handleGoBack,
+    handleTryAgain,
+    handleExit,
   };
 }

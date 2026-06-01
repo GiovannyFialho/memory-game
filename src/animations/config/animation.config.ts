@@ -60,6 +60,13 @@ export const ANIMATION_TIMINGS: AnimationTimings = {
       delayBetweenCards: 40,
     },
   },
+  fall: {
+    duration: 600,
+    rotation: 300,
+    opacityDuration: 200,
+    opacityDelay: 400,
+    maxRandomDelay: 200,
+  },
 };
 
 export const ANIMATION_EASINGS = {

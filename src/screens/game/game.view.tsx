@@ -16,8 +16,11 @@ export function GameView() {
   const {
     selectedTheme,
     countdownVisible,
+    isTimeoutModalVisible,
     handleCountdownComplete,
     handleGoBack,
+    handleTryAgain,
+    handleExit,
   } = useGameViewModel();
 
   return (
@@ -42,9 +45,9 @@ export function GameView() {
       />
 
       <DefeatModalView
-        visible={true}
-        onTryAgain={() => {}}
-        onGoHome={() => {}}
+        visible={isTimeoutModalVisible}
+        onTryAgain={handleTryAgain}
+        onGoHome={handleExit}
       />
     </SafeAreaView>
   );
