@@ -28,6 +28,12 @@ export const SPRING_CONFIG = {
     damping: 22,
     stiffness: 300,
   } as WithSpringConfig,
+
+  modal: {
+    damping: 25,
+    stiffness: 120,
+    mass: 1,
+  } as WithSpringConfig,
 };
 
 export type CardEntryAnimationType = "throw" | "deck";
