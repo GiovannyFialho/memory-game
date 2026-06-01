@@ -36,6 +36,7 @@ export function useGameViewModel() {
     useAnimationStore();
 
   const [showExitModal, setShowExitModal] = useState(false);
+  const [showVictoryModal, setShowVictoryModal] = useState(false);
   const [isTimeoutModalVisible, setIsTimeoutModalVisible] = useState(false);
   const [countdownVisible, setCountdownVisible] = useState(
     status === "countdown",
@@ -45,6 +46,7 @@ export function useGameViewModel() {
 
   const handleTryAgain = useCallback(() => {
     setIsTimeoutModalVisible(false);
+    setShowVictoryModal(false);
     setShouldAnimate(false);
 
     resetGame();
@@ -71,19 +73,19 @@ export function useGameViewModel() {
     }
   };
 
-  const handleConfirmExit = () => {
+  const handleConfirmExit = useCallback(() => {
     setShowExitModal(false);
 
     resetGame();
 
     router.replace("/(private)/home");
-  };
+  }, [resetGame]);
 
-  const handleCancelExit = () => {
+  const handleCancelExit = useCallback(() => {
     resumeGame();
 
     setShowExitModal(false);
-  };
+  }, [resumeGame]);
 
   const handleGoHome = () => {
     clearGame();
@@ -119,8 +121,9 @@ export function useGameViewModel() {
 
   useEffect(() => {
     if (status === "finished") {
-      // TODO: Implement victory modal
+      setShowVictoryModal(true);
     }
+
     if (status === "timeout") {
       createSequence()
         .wait(getFallAnimationDuration())
@@ -171,6 +174,7 @@ export function useGameViewModel() {
     countdownVisible,
     isTimeoutModalVisible,
     showExitModal,
+    showVictoryModal,
     setEntryAnimationType,
     setShouldAnimate,
     handleCountdownComplete,

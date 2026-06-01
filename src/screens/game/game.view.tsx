@@ -12,6 +12,7 @@ import { ExitConfirmationModalView } from "@/screens/game/components/exit-confir
 import { GameHeader } from "@/screens/game/components/game-header/game-header.view";
 
 import { colors } from "@/constants/colors";
+import { VictoryModalView } from "@/screens/game/components/victory-modal/victory-modal.view";
 
 export function GameView() {
   const {
@@ -19,6 +20,7 @@ export function GameView() {
     countdownVisible,
     isTimeoutModalVisible,
     showExitModal,
+    showVictoryModal,
     handleOpenExitModal,
     handleConfirmExit,
     handleCancelExit,
@@ -58,6 +60,12 @@ export function GameView() {
         visible={showExitModal}
         onConfirm={handleConfirmExit}
         onCancel={handleCancelExit}
+      />
+
+      <VictoryModalView
+        visible={showVictoryModal}
+        onPlayAgain={handleTryAgain}
+        onGoHistory={handleConfirmExit}
       />
     </SafeAreaView>
   );
