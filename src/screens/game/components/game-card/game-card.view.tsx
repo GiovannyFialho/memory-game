@@ -18,6 +18,7 @@ export function GameCardView({
   entry,
   shakeAnimatedStyle,
   successAnimatedStyle,
+  timeoutAnimatedStyle,
 }: ReturnType<typeof useGameCardViewModel>) {
   const {
     animatedStyle: selectionAnimatedStyle,
@@ -33,6 +34,7 @@ export function GameCardView({
         selectionAnimatedStyle,
         shakeAnimatedStyle,
         successAnimatedStyle,
+        timeoutAnimatedStyle,
       ]}
     >
       <Pressable
