@@ -33,10 +33,14 @@ export function useGameCardViewModel({
   const {
     playSuccessAnimation,
     fadeOutSuccessAnimation,
+    resetAnimation: resetCardSuccessAnimation,
     animatedStyle: successAnimatedStyle,
   } = useCardSuccessAnimation();
-  const { fallAnimation, animatedStyle: timeoutAnimatedStyle } =
-    useCardTimeoutAnimation();
+  const {
+    fallAnimation,
+    resetAnimation: resetCardTimeoutAnimation,
+    animatedStyle: timeoutAnimatedStyle,
+  } = useCardTimeoutAnimation();
 
   const previousFlippedRef = useRef(card.isFlipped);
 
@@ -79,10 +83,20 @@ export function useGameCardViewModel({
   useEffect(() => {
     if (status === "timeout" && !card.isMatched) {
       const randomDelay = Math.random() * 200;
-
       fallAnimation(randomDelay);
     }
-  }, [status, card.isMatched, fallAnimation]);
+
+    if (status === "countdown") {
+      resetCardSuccessAnimation();
+      resetCardTimeoutAnimation();
+    }
+  }, [
+    status,
+    card.isMatched,
+    fallAnimation,
+    resetCardSuccessAnimation,
+    resetCardTimeoutAnimation,
+  ]);
 
   return {
     card,

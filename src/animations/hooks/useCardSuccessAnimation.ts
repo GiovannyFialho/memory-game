@@ -18,14 +18,24 @@ export function useCardSuccessAnimation() {
   }, [scale]);
 
   const fadeOutSuccessAnimation = useCallback(() => {
-    scale.value = withTiming(0, { duration: 300 });
-    opacity.value = withTiming(0.8, { duration: 300 });
-  }, [scale, opacity]);
+    opacity.value = withTiming(0, { duration: 300 });
+    scale.value = withTiming(0.8, { duration: 300 });
+  }, [opacity, scale]);
+
+  const resetAnimation = useCallback(() => {
+    scale.value = 1;
+    opacity.value = 1;
+  }, [opacity, scale]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
     opacity: opacity.value,
   }));
 
-  return { playSuccessAnimation, fadeOutSuccessAnimation, animatedStyle };
+  return {
+    playSuccessAnimation,
+    fadeOutSuccessAnimation,
+    resetAnimation,
+    animatedStyle,
+  };
 }

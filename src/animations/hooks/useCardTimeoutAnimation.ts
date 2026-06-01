@@ -36,7 +36,9 @@ export function useCardTimeoutAnimation() {
 
   const resetAnimation = useCallback(() => {
     translateY.value = 0;
-  }, [translateY]);
+    rotation.value = 0;
+    opacity.value = 1;
+  }, [translateY, rotation, opacity]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
