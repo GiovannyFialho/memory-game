@@ -81,6 +81,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.grayscale.gray450,
+    backgroundColor: colors.grayscale.gray500,
   },
 });

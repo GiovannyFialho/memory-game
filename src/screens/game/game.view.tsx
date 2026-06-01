@@ -7,6 +7,7 @@ import { useGameViewModel } from "@/screens/game/game.model";
 
 import { AppText } from "@/shared/components/app-text";
 
+import { DefeatModalView } from "@/screens/game/components/defeat-modal/defeat-modal.view";
 import { GameHeader } from "@/screens/game/components/game-header/game-header.view";
 
 import { colors } from "@/constants/colors";
@@ -38,6 +39,12 @@ export function GameView() {
       <CountdownOverlay
         countdownVisible={countdownVisible}
         onComplete={handleCountdownComplete}
+      />
+
+      <DefeatModalView
+        visible={true}
+        onTryAgain={() => {}}
+        onGoHome={() => {}}
       />
     </SafeAreaView>
   );
