@@ -9,6 +9,7 @@ import {
 
 export function useCardShakeAnimation() {
   const translateX = useSharedValue(0);
+  const rotation = useSharedValue(0);
 
   const onShake = useCallback(() => {
     translateX.value = withSequence(
@@ -23,10 +24,26 @@ export function useCardShakeAnimation() {
       ),
       withTiming(0, { duration: 50 }),
     );
-  }, [translateX]);
+
+    rotation.value = withSequence(
+      withTiming(5, { duration: 50 }),
+      withRepeat(
+        withSequence(
+          withTiming(-5, { duration: 50 }),
+          withTiming(5, { duration: 50 }),
+        ),
+        3,
+        false,
+      ),
+      withTiming(0, { duration: 50 }),
+    );
+  }, [translateX, rotation]);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: translateX.value }],
+    transform: [
+      { translateX: translateX.value },
+      { rotate: `${rotation.value}deg` },
+    ],
   }));
 
   return { animatedStyle, onShake };
