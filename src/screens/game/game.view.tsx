@@ -8,6 +8,7 @@ import { useGameViewModel } from "@/screens/game/game.model";
 import { AppText } from "@/shared/components/app-text";
 
 import { DefeatModalView } from "@/screens/game/components/defeat-modal/defeat-modal.view";
+import { ExitConfirmationModalView } from "@/screens/game/components/exit-confirmation-modal/exit-confirmation-modal.view";
 import { GameHeader } from "@/screens/game/components/game-header/game-header.view";
 
 import { colors } from "@/constants/colors";
@@ -17,15 +18,18 @@ export function GameView() {
     selectedTheme,
     countdownVisible,
     isTimeoutModalVisible,
+    showExitModal,
+    handleOpenExitModal,
+    handleConfirmExit,
+    handleCancelExit,
     handleCountdownComplete,
-    handleGoBack,
     handleGoHome,
     handleTryAgain,
   } = useGameViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
-      <GameHeader onGoBack={handleGoBack} />
+      <GameHeader onGoBack={handleOpenExitModal} />
 
       <View style={styles.gameInfo}>
         <AppText weight="extra-bold" style={styles.title}>
@@ -48,6 +52,12 @@ export function GameView() {
         visible={isTimeoutModalVisible}
         onTryAgain={handleTryAgain}
         onGoHome={handleGoHome}
+      />
+
+      <ExitConfirmationModalView
+        visible={showExitModal}
+        onConfirm={handleConfirmExit}
+        onCancel={handleCancelExit}
       />
     </SafeAreaView>
   );

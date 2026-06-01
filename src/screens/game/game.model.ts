@@ -28,11 +28,14 @@ export function useGameViewModel() {
     cards,
     resetGame,
     clearGame,
+    pauseGame,
+    resumeGame,
   } = useGameStore();
 
   const { entryAnimationType, setShouldAnimate, setEntryAnimationType } =
     useAnimationStore();
 
+  const [showExitModal, setShowExitModal] = useState(false);
   const [isTimeoutModalVisible, setIsTimeoutModalVisible] = useState(false);
   const [countdownVisible, setCountdownVisible] = useState(
     status === "countdown",
@@ -61,7 +64,26 @@ export function useGameViewModel() {
       .run();
   }, []);
 
-  const handleGoBack = () => router.back();
+  const handleOpenExitModal = () => {
+    if (status === "playing") {
+      pauseGame();
+      setShowExitModal(true);
+    }
+  };
+
+  const handleConfirmExit = () => {
+    setShowExitModal(false);
+
+    resetGame();
+
+    router.replace("/(private)/home");
+  };
+
+  const handleCancelExit = () => {
+    resumeGame();
+
+    setShowExitModal(false);
+  };
 
   const handleGoHome = () => {
     clearGame();
@@ -148,12 +170,15 @@ export function useGameViewModel() {
     selectedTheme,
     countdownVisible,
     isTimeoutModalVisible,
+    showExitModal,
     setEntryAnimationType,
     setShouldAnimate,
     handleCountdownComplete,
-    handleGoBack,
     handleGoHome,
     handleTryAgain,
     handleExit,
+    handleOpenExitModal,
+    handleConfirmExit,
+    handleCancelExit,
   };
 }
