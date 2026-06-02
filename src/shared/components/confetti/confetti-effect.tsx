@@ -14,7 +14,7 @@ interface ConfettiEffectViewParams {
   continuousInterval?: number;
 }
 
-export function ConfettiEffectView({
+export function ConfettiEffect({
   active,
   burstCount = 40,
   continuousCount = 2,
