@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
+import { ConfettiPiece } from "@/shared/components/confetti/confetti-piece";
 import {
   createConfettiPiece,
   type ConfettiConfig,
@@ -83,5 +84,32 @@ export function ConfettiEffectView({
     };
   }, [active, burstCount, cleanup, continuousCount, continuousInterval]);
 
-  return <View />;
+  if (!active && pieces.length === 0) return;
+
+  return (
+    <View style={styles.container} pointerEvents="none">
+      {pieces.map((confetti) => (
+        <ConfettiPiece
+          key={confetti.id}
+          color={confetti.color}
+          delay={confetti.delay}
+          duration={confetti.duration}
+          rotationSpeed={confetti.rotationSpeed}
+          size={confetti.size}
+          shape={confetti.shape}
+          startX={confetti.startX}
+          swingAmount={confetti.swingAmount}
+          swingDirection={confetti.swingDirection}
+        />
+      ))}
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    overflow: "hidden",
+    zIndex: 1000,
+  },
+});

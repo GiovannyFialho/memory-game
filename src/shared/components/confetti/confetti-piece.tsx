@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import {
   Dimensions,
   type StyleProp,
@@ -51,7 +51,7 @@ function confettiShapeType(
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-export function ConfettiPieceComponent({
+function ConfettiPieceComponent({
   color,
   startX,
   delay,
@@ -101,10 +101,17 @@ export function ConfettiPieceComponent({
 
   return (
     <Animated.View
-      style={[styles.piece, animatedStyle, confettiShapeType(size, shape)]}
+      style={[
+        styles.piece,
+        animatedStyle,
+        confettiShapeType(size, shape),
+        { left: startX, backgroundColor: color, width: size, height: size },
+      ]}
     />
   );
 }
+
+export const ConfettiPiece = memo(ConfettiPieceComponent);
 
 const styles = StyleSheet.create({
   piece: {

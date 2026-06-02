@@ -8,6 +8,7 @@ import { useModalAnimation } from "@/animations/hooks/useModalAnimation";
 import { usePressAnimation } from "@/animations/hooks/usePressAnimation";
 
 import { AppText } from "@/shared/components/app-text";
+import { ConfettiEffectView } from "@/shared/components/confetti-effect/confetti-effect.view";
 import { useGameStore } from "@/shared/stores/game.store";
 
 import { colors, gradients } from "@/constants/colors";
@@ -56,6 +57,8 @@ export function VictoryModalView({
   return (
     <Modal visible={visible} transparent>
       <BlurView intensity={10} style={styles.overlay}>
+        <ConfettiEffectView active={visible} />
+
         <Animated.View style={[styles.modalContainer, animatedStyle]}>
           <MaterialCommunityIcons
             name="trophy-outline"
