@@ -2,7 +2,7 @@ import { Dimensions } from "react-native";
 
 export type ConfettiShapeType = "square" | "rectangle" | "circle";
 
-interface ConfettiConfig {
+export interface ConfettiConfig {
   id: number;
   color: string;
   startX: number;
