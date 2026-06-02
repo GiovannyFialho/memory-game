@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 
-import type { ConfettiConfig } from "@/shared/utils/confetti";
+import {
+  createConfettiPiece,
+  type ConfettiConfig,
+} from "@/shared/utils/confetti";
 
 interface ConfettiEffectViewParams {
   active: boolean;
@@ -12,9 +15,9 @@ interface ConfettiEffectViewParams {
 
 export function ConfettiEffectView({
   active,
-  burstCount,
-  continuousCount,
-  continuousInterval,
+  burstCount = 40,
+  continuousCount = 2,
+  continuousInterval = 500,
 }: ConfettiEffectViewParams) {
   const [pieces, setPieces] = useState<ConfettiConfig[]>([]);
 
@@ -33,9 +36,22 @@ export function ConfettiEffectView({
 
   useEffect(() => {
     if (active) {
+      intervalRef.current = setInterval(() => {
+        const newPieces: ConfettiConfig[] = Array.from(
+          { length: continuousCount },
+          () => {
+            idCounterRef.current += 1;
+
+            return createConfettiPiece(idCounterRef.current, false);
+          },
+        );
+
+        setPieces((prevValues) => [...prevValues, ...newPieces]);
+      }, continuousInterval);
+
       cleanupRef.current = setInterval(cleanup, 2000);
     }
-  }, [active]);
+  }, [active, cleanup, continuousCount, continuousInterval]);
 
   return <View />;
 }
