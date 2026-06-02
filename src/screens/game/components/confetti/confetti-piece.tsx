@@ -14,7 +14,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-export type ConfettiShapeType = "square" | "rectangle" | "circle";
+import type { ConfettiShapeType } from "@/shared/utils/confetti";
 
 interface ConfettiPieceComponentParams {
   color: string;
