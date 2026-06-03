@@ -6,6 +6,7 @@ import { Baloo2_800ExtraBold } from "@expo-google-fonts/baloo-2/800ExtraBold";
 import { useFonts } from "@expo-google-fonts/baloo-2/useFonts";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import "react-native-reanimated";
 
@@ -26,11 +27,13 @@ export default function RootLayout() {
     <>
       <StatusBar style="light" />
 
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(public)" />
-        <Stack.Screen name="(private)" />
-        <Stack.Screen name="index" />
-      </Stack>
+      <GestureHandlerRootView>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(public)" />
+          <Stack.Screen name="(private)" />
+          <Stack.Screen name="index" />
+        </Stack>
+      </GestureHandlerRootView>
     </>
   );
 }
