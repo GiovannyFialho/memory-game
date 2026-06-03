@@ -15,31 +15,42 @@ interface MatchHistoryCardParams {
 export function MatchHistoryCard({ match }: MatchHistoryCardParams) {
   return (
     <View style={styles.container}>
-      <View>
-        <AppText>{match.category}</AppText>
-        <AppText>{match.position}</AppText>
+      <View style={styles.header}>
+        <AppText weight="extra-bold" style={styles.title}>
+          {match.category}
+        </AppText>
+
+        <AppText weight="extra-bold" style={styles.position}>
+          {match.position}º
+        </AppText>
       </View>
 
-      <View>
-        <View>
+      <View style={styles.footer}>
+        <View style={styles.infoBadge}>
+          <MaterialCommunityIcons
+            name="calendar-outline"
+            size={16}
+            color={colors.grayscale.gray300}
+          />
+
+          <AppText weight="medium" style={styles.infoText}>
+            {match.date}
+          </AppText>
+        </View>
+
+        <View style={styles.infoBadge}>
           <MaterialCommunityIcons
             name="clock-outline"
             size={16}
             color={colors.grayscale.gray300}
           />
-          <AppText>{match.date}</AppText>
+
+          <AppText weight="medium" style={styles.infoText}>
+            {match.time}
+          </AppText>
         </View>
 
-        <View>
-          <MaterialCommunityIcons
-            name="clock-outline"
-            size={16}
-            color={colors.grayscale.gray300}
-          />
-          <AppText>{match.time}</AppText>
-        </View>
-
-        <View>
+        <View style={styles.infoBadge}>
           <DifficultyIconView
             difficulty={match.difficulty}
             inactiveColor={colors.grayscale.gray300}
@@ -56,10 +67,44 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.grayscale.gray500,
     borderRadius: 20,
-    padding: 24,
+    padding: 20,
     gap: 20,
     borderWidth: 1,
     borderColor: colors.grayscale.gray400,
     marginBottom: 12,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  title: {
+    fontSize: 18,
+    color: colors.grayscale.gray100,
+    width: "60%",
+  },
+  position: {
+    fontSize: 18,
+    color: colors.accent.cyan,
+  },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  infoBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.grayscale.gray400,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    height: 32,
+    gap: 6,
+  },
+  infoText: {
+    lineHeight: 20,
+    color: colors.grayscale.gray200,
   },
 });
