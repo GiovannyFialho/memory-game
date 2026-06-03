@@ -10,6 +10,7 @@ import {
 
 import { Difficulty } from "@/shared/interfaces/difficulty";
 import { useGameStore } from "@/shared/stores/game.store";
+import { useRankingStore } from "@/shared/stores/ranking.store";
 import { challengeTheme, difficultyConfigs } from "@/shared/utils/challenge";
 import { createSequence } from "@/shared/utils/sequence";
 
@@ -30,10 +31,14 @@ export function useGameViewModel() {
     clearGame,
     pauseGame,
     resumeGame,
+    challenge,
+    timeElapsed,
   } = useGameStore();
 
   const { entryAnimationType, setShouldAnimate, setEntryAnimationType } =
     useAnimationStore();
+
+  const { addScore } = useRankingStore();
 
   const [showExitModal, setShowExitModal] = useState(false);
   const [showVictoryModal, setShowVictoryModal] = useState(false);
@@ -122,6 +127,14 @@ export function useGameViewModel() {
   useEffect(() => {
     if (status === "finished") {
       setShowVictoryModal(true);
+
+      if (challenge) {
+        addScore({
+          category: challenge.title,
+          difficulty: challenge.difficulty,
+          time: timeElapsed,
+        });
+      }
     }
 
     if (status === "timeout") {
@@ -130,7 +143,7 @@ export function useGameViewModel() {
         .then(() => setIsTimeoutModalVisible(true))
         .run();
     }
-  }, [status]);
+  }, [status, challenge, addScore, timeElapsed]);
 
   useEffect(() => {
     const theme = challengeTheme.find(({ id }) => id === themeId);
