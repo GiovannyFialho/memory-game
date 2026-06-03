@@ -3,8 +3,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useHistoryViewModel } from "@/screens/history/history.model";
 
+import { AnimatedHistoryCard } from "@/screens/history/components/animated-history-card";
 import { ListHeader } from "@/screens/history/components/list-header/list-header";
-import { MatchHistoryCard } from "@/screens/history/components/match-history-card/match-history-card";
 
 import { colors } from "@/constants/colors";
 
@@ -18,7 +18,9 @@ export function HistoryView({
       <View style={styles.contentContainer}>
         <FlatList
           data={matches}
-          renderItem={({ item }) => <MatchHistoryCard match={item} />}
+          renderItem={({ item, index }) => (
+            <AnimatedHistoryCard match={item} index={index} />
+          )}
           keyExtractor={({ id }) => `score-${id}`}
           style={{ width: "100%" }}
           ListHeaderComponent={() => (
