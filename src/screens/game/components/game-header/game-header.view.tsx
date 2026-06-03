@@ -70,9 +70,9 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   backButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
