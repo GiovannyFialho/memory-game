@@ -10,7 +10,7 @@ import { useHistoryViewModel } from "@/screens/history/history.model";
 import { colors } from "@/constants/colors";
 
 export function HistoryView({
-  scores,
+  matches,
 }: ReturnType<typeof useHistoryViewModel>) {
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +32,7 @@ export function HistoryView({
       <View style={styles.contentContainer}>
         <FlatList
           keyExtractor={({ id }) => `score-${id}`}
-          data={scores}
+          data={matches}
           renderItem={({ item }) => (
             <View>
               <AppText style={{ color: colors.grayscale.gray100 }}>
@@ -61,13 +61,14 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingBottom: 30,
   },
   backButton: {
     width: 40,
     height: 40,
-    borderRadius: 24,
+    borderRadius: "50%",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 16,
@@ -79,5 +80,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Baloo2_800ExtraBold",
     color: colors.grayscale.gray100,
+  },
+  emptyButton: {
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
