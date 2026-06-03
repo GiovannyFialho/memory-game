@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 import { Difficulty } from "@/shared/interfaces/difficulty";
 import { useRankingStore } from "@/shared/stores/ranking.store";
 
@@ -14,6 +16,7 @@ export interface FormattedMatch {
   difficulty: Difficulty;
   time: string;
   position: number;
+  date: string;
 }
 
 export function useHistoryViewModel() {
@@ -25,6 +28,7 @@ export function useHistoryViewModel() {
     difficulty: score.difficulty,
     time: formatTime(score.time),
     position: index + 1,
+    date: format(score.date, "dd/MM/yy"),
   }));
 
   const totalGames = scores.length;

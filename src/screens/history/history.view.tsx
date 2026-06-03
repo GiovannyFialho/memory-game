@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AppText } from "@/shared/components/app-text";
 
+import { MatchHistoryCard } from "@/screens/history/components/match-history-card/match-history-card";
 import { useHistoryViewModel } from "@/screens/history/history.model";
 
 import { colors } from "@/constants/colors";
@@ -33,13 +34,8 @@ export function HistoryView({
         <FlatList
           keyExtractor={({ id }) => `score-${id}`}
           data={matches}
-          renderItem={({ item }) => (
-            <View>
-              <AppText style={{ color: colors.grayscale.gray100 }}>
-                {item.category}
-              </AppText>
-            </View>
-          )}
+          style={{ width: "100%" }}
+          renderItem={({ item }) => <MatchHistoryCard match={item} />}
         />
       </View>
     </SafeAreaView>
