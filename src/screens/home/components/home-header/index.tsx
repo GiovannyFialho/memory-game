@@ -1,4 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 
@@ -37,6 +38,7 @@ export function HomeHeader() {
             style={[styles.trophyContainer, pressAnimatedStyle.animatedStyle]}
             onPressIn={pressAnimatedStyle.onPressIn}
             onPressOut={pressAnimatedStyle.onPressOut}
+            onPress={() => router.push("/history")}
           >
             <MaterialCommunityIcons
               name="trophy-outline"
