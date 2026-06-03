@@ -9,6 +9,7 @@ export interface GameScore {
   category: string;
   difficulty: Difficulty;
   date: Date;
+  time: number;
 }
 
 interface RankingStore {
@@ -16,6 +17,12 @@ interface RankingStore {
   addScore: (score: Omit<GameScore, "id" | "date">) => void;
   deleteScore: (id: string) => void;
 }
+
+const difficultyWeight: Record<Difficulty, number> = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+};
 
 export const useRankingStore = create<RankingStore>()(
   persist(
@@ -29,7 +36,14 @@ export const useRankingStore = create<RankingStore>()(
         };
 
         set((state) => ({
-          scores: [...state.scores, score],
+          scores: [...state.scores, score].sort((a, b) => {
+            const diffA = difficultyWeight[a.difficulty] || 0;
+            const diffB = difficultyWeight[b.difficulty];
+
+            if (diffB !== diffA) return diffB - diffA;
+
+            return a.time - b.time;
+          }),
         }));
       },
       deleteScore: () => {},
