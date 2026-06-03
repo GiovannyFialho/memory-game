@@ -46,7 +46,11 @@ export const useRankingStore = create<RankingStore>()(
           }),
         }));
       },
-      deleteScore: () => {},
+      deleteScore: (id) => {
+        set((state) => ({
+          scores: state.scores.filter((score) => score.id !== id),
+        }));
+      },
     }),
     {
       name: "@memory-game:scores",
