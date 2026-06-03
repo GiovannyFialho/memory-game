@@ -27,7 +27,7 @@ export default function RootLayout() {
     <>
       <StatusBar style="light" />
 
-      <GestureHandlerRootView>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(public)" />
           <Stack.Screen name="(private)" />

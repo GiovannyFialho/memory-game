@@ -1,10 +1,11 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useHistoryViewModel } from "@/screens/history/history.model";
-
 import { AnimatedHistoryCard } from "@/screens/history/components/animated-history-card";
 import { ListHeader } from "@/screens/history/components/list-header/list-header";
+import { useHistoryViewModel } from "@/screens/history/history.model";
+
+import { useRankingStore } from "@/shared/stores/ranking.store";
 
 import { colors } from "@/constants/colors";
 
@@ -13,13 +14,19 @@ export function HistoryView({
   totalGames,
   averageTime,
 }: ReturnType<typeof useHistoryViewModel>) {
+  const { deleteScore } = useRankingStore();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <FlatList
           data={matches}
           renderItem={({ item, index }) => (
-            <AnimatedHistoryCard match={item} index={index} />
+            <AnimatedHistoryCard
+              index={index}
+              match={item}
+              onDelete={() => deleteScore(item.id)}
+            />
           )}
           keyExtractor={({ id }) => `score-${id}`}
           style={{ width: "100%" }}

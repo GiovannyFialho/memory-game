@@ -25,7 +25,7 @@ export function GameHeader({ onGoBack }: GameHeaderProps) {
 
   const { animatedStyle, onPressIn, onPressOut } = usePressAnimation({
     scaleActive: 0.8,
-    width: 48,
+    width: 40,
   });
 
   return (
@@ -37,8 +37,8 @@ export function GameHeader({ onGoBack }: GameHeaderProps) {
         onPress={onGoBack}
       >
         <MaterialCommunityIcons
-          name="chevron-left"
-          size={32}
+          name="arrow-left"
+          size={20}
           color={colors.grayscale.gray100}
         />
       </AnimatedPressable>
