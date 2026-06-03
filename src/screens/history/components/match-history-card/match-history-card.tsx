@@ -12,6 +12,12 @@ interface MatchHistoryCardParams {
   match: FormattedMatch;
 }
 
+const positionColors = [
+  colors.ranking.gold,
+  colors.ranking.silver,
+  colors.ranking.bronze,
+];
+
 export function MatchHistoryCard({ match }: MatchHistoryCardParams) {
   return (
     <View style={styles.container}>
@@ -20,7 +26,14 @@ export function MatchHistoryCard({ match }: MatchHistoryCardParams) {
           {match.category}
         </AppText>
 
-        <AppText weight="extra-bold" style={styles.position}>
+        <AppText
+          weight="extra-bold"
+          style={{
+            ...styles.position,
+            color:
+              positionColors[match.position - 1] ?? colors.grayscale.gray300,
+          }}
+        >
           {match.position}º
         </AppText>
       </View>

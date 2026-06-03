@@ -23,6 +23,7 @@ export function GameView() {
     showVictoryModal,
     handleOpenExitModal,
     handleConfirmExit,
+    handleGoToHistory,
     handleCancelExit,
     handleCountdownComplete,
     handleGoHome,
@@ -65,7 +66,7 @@ export function GameView() {
       <VictoryModalView
         visible={showVictoryModal}
         onPlayAgain={handleTryAgain}
-        onGoHistory={handleConfirmExit}
+        onGoHistory={handleGoToHistory}
       />
     </SafeAreaView>
   );

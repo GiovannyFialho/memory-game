@@ -1,3 +1,6 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
+import { GestureDetector } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 
 import { MatchHistoryCard } from "@/screens/history/components/match-history-card/match-history-card";
@@ -5,7 +8,8 @@ import { FormattedMatch } from "@/screens/history/history.model";
 
 import { useListEntryAnimation } from "@/animations/hooks/useListEntryAnimation";
 import { useSweepToDelete } from "@/animations/hooks/useSweepToDelete";
-import { GestureDetector } from "react-native-gesture-handler";
+
+import { colors } from "@/constants/colors";
 
 interface AnimatedHistoryCardParams {
   index: number;
@@ -28,6 +32,14 @@ export function AnimatedHistoryCard({
 
   return (
     <Animated.View style={[animatedStyle, containerAnimatedStyle]}>
+      <Animated.View style={[deleteIconAnimatedStyle, styles.deleteBackground]}>
+        <MaterialCommunityIcons
+          name="trash-can-outline"
+          size={24}
+          color={colors.semantic.error}
+        />
+      </Animated.View>
+
       <GestureDetector gesture={panGesture}>
         <Animated.View style={cardAnimatedStyle}>
           <MatchHistoryCard match={match} />
@@ -36,3 +48,12 @@ export function AnimatedHistoryCard({
     </Animated.View>
   );
 }
+
+const styles = StyleSheet.create({
+  deleteBackground: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingRight: 24,
+  },
+});

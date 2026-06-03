@@ -86,6 +86,14 @@ export function useGameViewModel() {
     router.replace("/(private)/home");
   }, [resetGame]);
 
+  const handleGoToHistory = useCallback(() => {
+    setShowExitModal(false);
+
+    resetGame();
+
+    router.replace("/(private)/history");
+  }, [resetGame]);
+
   const handleCancelExit = useCallback(() => {
     resumeGame();
 
@@ -196,6 +204,7 @@ export function useGameViewModel() {
     handleExit,
     handleOpenExitModal,
     handleConfirmExit,
+    handleGoToHistory,
     handleCancelExit,
   };
 }
